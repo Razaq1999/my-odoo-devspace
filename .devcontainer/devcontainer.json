@@ -1,0 +1,29 @@
+{
+    "name": "Odoo 18 Dev Space",
+    "image": "mcr.microsoft.com/devcontainers/python:3.11-bullseye",
+    "features": {
+        "ghcr.io/devcontainers/features/postgres:1": {
+            "version": "15", // You can choose PG 14, 15, or 16. Odoo 18 supports these.
+            "adminPassword": "mysecretadminpassword" // Optional: sets a password for the admin 'postgres' user in the container
+        },
+        "ghcr.io/devcontainers-contrib/features/wkhtmltopdf:1": {} // Installs wkhtmltopdf
+    },
+    "forwardPorts": [8069], // Odoo's default port
+    "postCreateCommand": "bash .devcontainer/post-create.sh",
+    "remoteUser": "vscode", // Runs as non-root user 'vscode'
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-azuretools.vscode-docker", // Useful for Docker related tasks if any
+                "GitHub.copilot" // Optional: if you use GitHub Copilot
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python"
+            }
+        }
+    },
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
+}
